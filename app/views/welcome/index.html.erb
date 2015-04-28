@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+
+<head>
+  
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Binghamton Bus App</title>
+
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+
+        <!-- Bootstrap -->
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+
+
+    <style>
+      #grad {
+color: white;
+    height: 100%;
+    width: 100%;
+background: rgba(82,161,235,1);
+background: -moz-linear-gradient(top, rgba(82,161,235,1) 0%, rgba(10,104,204,1) 43%, rgba(10,104,204,1) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(82,161,235,1)), color-stop(43%, rgba(10,104,204,1)), color-stop(100%, rgba(10,104,204,1)));
+background: -webkit-linear-gradient(top, rgba(82,161,235,1) 0%, rgba(10,104,204,1) 43%, rgba(10,104,204,1) 100%);
+background: -o-linear-gradient(top, rgba(82,161,235,1) 0%, rgba(10,104,204,1) 43%, rgba(10,104,204,1) 100%);
+background: -ms-linear-gradient(top, rgba(82,161,235,1) 0%, rgba(10,104,204,1) 43%, rgba(10,104,204,1) 100%);
+background: linear-gradient(to bottom, rgba(82,161,235,1) 0%, rgba(10,104,204,1) 43%, rgba(10,104,204,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52a1eb', endColorstr='#0a68cc', GradientType=0 );
+}
+
+#grad2 {
+color: white;
+    height: 100%;
+    width: 100%;
+background: rgba(82,161,235,1);
+background: -moz-linear-gradient(top, rgba(82,161,235,1) 0%, rgba(10,104,204,1) 43%, rgba(10,104,204,1) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(82,161,235,1)), color-stop(43%, rgba(10,104,204,1)), color-stop(100%, rgba(10,104,204,1)));
+background: -webkit-linear-gradient(top, rgba(82,161,235,1) 0%, rgba(10,104,204,1) 43%, rgba(10,104,204,1) 100%);
+background: -o-linear-gradient(top, rgba(82,161,235,1) 0%, rgba(10,104,204,1) 43%, rgba(10,104,204,1) 100%);
+background: -ms-linear-gradient(top, rgba(82,161,235,1) 0%, rgba(10,104,204,1) 43%, rgba(10,104,204,1) 100%);
+background: linear-gradient(to bottom, rgba(82,161,235,1) 0%, rgba(10,104,204,1) 43%, rgba(10,104,204,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52a1eb', endColorstr='#0a68cc', GradientType=0 );
+}
+    </style>
+
+
+
+</head>
+
+
+<script type="text/javascript">
+  function initialize() {
+
+  var input = document.getElementById('address');
+  var autocomplete = new google.maps.places.Autocomplete(input);
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+<script type="text/javascript">
+  function initialize() {
+
+  var input2 = document.getElementById('destaddress');
+  var autocomplete2 = new google.maps.places.Autocomplete(input2);
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+<body>
+
+  <div  class="bs-docs-header jumbotron" id="grad" align ="center" >
+  <h1>Binghamton Bus App</h1>
+<p>Search OCCT bus route the smart way... Just enter start and destination location address!</p>
+</div>
+
+          <div class="container" align ="center">
+          <div  align = "center">
+
+   <%= form_tag("/welcome/index", method: "post") do %>
+  <div class ="input-group">
+  <label>Current Location</label>
+  <%= text_field_tag("address", params['address'], :class => 'form-control') %>
+</div><br/>
+<div class ="input-group">
+  <label>Destination Location</label>
+  <%= text_field_tag("destaddress", params['destaddress'], :class => 'form-control') %>
+  </div>
+
+  
+  <p>
+    <br/>
+<%= submit_tag "", :value => "Find Buses", :class => "btn btn-default" %>  </p>
+
+<% end %>
+
+
+        
+      </div>
+                
+            </div>
+
+
+<div align ="center">
+
+<% if @cStop && @dStop %>
+<b>
+<%= "Current Stop: "%>
+</b>
+<%=" #{@cStop.name} "%>
+<b>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<%= "Destination Stop: "%>
+</b>
+<%= "#{@dStop.name}"%>
+<br/><br/>
+<% end %>
+
+
+
+</div align ="center">
+
+<div align ="center">
+
+<% if @size %>
+<% if @size >= 3 %>
+
+<% 3.times do |i| %>
+<p>
+  <div align ="center" style = "width:50%" class="list-group">
+<%= "#{@busName[i]} is arriving at #{@arrivalTime[i]}" %><br>
+</div>
+</p>
+<% end %>
+<% end %>
+<% end %>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+</div>
+
+
+
+<nav class = "navbar navbar-default navbar-fixed-bottom" align = "center" >
+            <footer ><h6>Displayed Timings are estimated based on the schedule provided by
+              OCC Transport</h6></footer>
+          </nav>
+
+</body>
+
+
+
+
+</html>
+
+
+
