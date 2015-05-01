@@ -51,7 +51,8 @@ inner join
 (SELECT * from schedules as S where S.stop_id = #{endStopId}) B
 on A.bustag = B.bustag
 where A.arrival < B.arrival
-and A.arrival > current_time();"
+#and A.arrival > current_time();"
+"
 @temp = @connection.connection.execute(sql);
 
 @busName = Array.new
