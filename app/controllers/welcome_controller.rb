@@ -59,6 +59,7 @@ where A.arrival < B.arrival"
 
 @temp = @connection.connection.execute(sql);
 
+
 @busName = Array.new
 @arrivalTime = Array.new
 @temp.each do |t|

@@ -127,11 +127,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52a1eb', end
 </div align ="center">
 
 <div align ="center">
-<p>
 
-<%= "#{@temp}" %><br>
-</div>
-</p>
 <% if @size %>
 <% if @size >= 3 %>
 
