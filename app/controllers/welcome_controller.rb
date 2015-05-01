@@ -59,7 +59,7 @@ where A.arrival < B.arrival"
 
 result = @connection.connection.execute(sql);
 
-@temp = result.cmd_tuples
+@temp = result.values
 
 
 
