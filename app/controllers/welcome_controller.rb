@@ -34,14 +34,19 @@ class WelcomeController < ApplicationController
 #@possible_buses = @possible_sbuses.joins(:@possible_dbuses)
 @temp = @possible_sbuses
 
+db_parts = ENV['DATABASE_URL'].split(/\/|:|@/)
+
+#conn = PGconn.open(:host =>  host, :dbname => db, :user=> username, :password=> password)
+
+
 
 @connection = ActiveRecord::Base.establish_connection(
-            :adapter => "postgresql",
-            :host => "ec2-184-73-165-195.compute-1.amazonaws.com",
-            :database => "d3tjsoqs2ldgks",
-            :username => "poglkhpvagspfk",
-            :password => "hmuUSorO_T8qyrmk6JoIN5I8_Y",
-	    :port => "5432"
+            :adapter => db_parts[0],
+            :host => db_parts[5],
+            :database => db_parts[7],
+            :username => db_parts[3],
+            :password => db_parts[4],
+	    :port => db_parts[6]
 )
 
 sql = "
