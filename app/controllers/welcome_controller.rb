@@ -34,7 +34,7 @@ class WelcomeController < ApplicationController
 #@possible_buses = @possible_sbuses.joins(:@possible_dbuses)
 @temp = @possible_sbuses
 
-db_parts = ENV['DATABASE_URL'].split(/\/|:|@/)
+db_parts = "postgres://poglkhpvagspfk:hmuUSorO_T8qyrmk6JoIN5I8_Y@ec2-184-73-165-195.compute-1.amazonaws.com:5432/d3tjsoqs2ldgks".split(/\/|:|@/)
 
 #conn = PGconn.open(:host =>  host, :dbname => db, :user=> username, :password=> password)
 
