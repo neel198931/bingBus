@@ -132,7 +132,24 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52a1eb', end
 <%= "#{@temp}" %><br>
 </div>
 </p>
+<% if @size %>
+<% if @size >= 3 %>
 
+<% 3.times do |i| %>
+<p>
+  <div align ="center" style = "width:50%" class="list-group">
+<%= "#{@busName[i]} is arriving at #{@arrivalTime[i]}" %><br>
+</div>
+</p>
+<% end %>
+<% end %>
+<% end %>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
 </div>
 
 

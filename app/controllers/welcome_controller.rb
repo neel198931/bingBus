@@ -55,7 +55,8 @@ select A.bus_id as busid, A.stop_id as source, A.arrival as atime, B.arrival as 
 inner join
 (SELECT * from schedules as S where S.stop_id = #{endStopId}) B
 on A.bustag = B.bustag
-where A.arrival < B.arrival"
+where A.arrival < B.arrival
+and A.arrival > Timeofday()"
 
 result = @connection.connection.execute(sql);
 

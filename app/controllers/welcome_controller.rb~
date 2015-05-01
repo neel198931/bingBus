@@ -61,6 +61,16 @@ result = @connection.connection.execute(sql);
 
 @temp = result.values
 
+@busName = Array.new
+@arrivalTime = Array.new
+@temp.each do |t|
+  tempbus = Bus.find(t[0])
+  @busName.push(tempbus.name)
+  @arrivalTime.push(t[2])
+end
+
+@size = @busName.length
+
 
    #Get all the buses at the start location and respective timing
   # @startBuses = Array.new
