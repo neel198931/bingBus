@@ -37,7 +37,7 @@ class WelcomeController < ApplicationController
 
 @connection = ActiveRecord::Base.establish_connection(
             :adapter => "postgresql",
-            :host => "ec2-23-21-140-156.compute-1.amazonaws.com",
+            :host => "ec2-184-73-165-195.compute-1.amazonaws.com",
             #:database => "BingBus_production",
             #:username => "root",
             #:password => ""
