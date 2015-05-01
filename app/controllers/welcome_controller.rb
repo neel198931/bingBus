@@ -57,7 +57,9 @@ inner join
 on A.bustag = B.bustag
 where A.arrival < B.arrival"
 
-@temp = @connection.connection.execute(sql);
+result = @connection.connection.execute(sql);
+
+@temp = result.cmd_tuples
 
 
 
