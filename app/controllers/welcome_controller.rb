@@ -41,7 +41,7 @@ db_parts = "postgres://poglkhpvagspfk:hmuUSorO_T8qyrmk6JoIN5I8_Y@ec2-184-73-165-
 
 
 @connection = ActiveRecord::Base.establish_connection(
-            :adapter => db_parts[0],
+            :adapter => "postgresql",
             :host => db_parts[5],
             :database => db_parts[7],
             :username => db_parts[3],
