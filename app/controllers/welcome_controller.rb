@@ -38,9 +38,10 @@ class WelcomeController < ApplicationController
 @connection = ActiveRecord::Base.establish_connection(
             :adapter => "postgresql",
             :host => "ec2-184-73-165-195.compute-1.amazonaws.com",
-            #:database => "BingBus_production",
-            #:username => "root",
-            #:password => ""
+            :database => "d3tjsoqs2ldgks",
+            :username => "poglkhpvagspfk",
+            :password => "hmuUSorO_T8qyrmk6JoIN5I8_Y",
+	    :port => "5432"
 )
 
 sql = "
