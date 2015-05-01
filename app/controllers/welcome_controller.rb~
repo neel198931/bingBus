@@ -59,9 +59,6 @@ where A.arrival < B.arrival"
 
 @temp = @connection.connection.execute(sql);
 
-if @temp.length == 0
-  @message = "No busses"
-end
 
 @busName = Array.new
 @arrivalTime = Array.new

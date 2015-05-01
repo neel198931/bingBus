@@ -60,17 +60,6 @@ where A.arrival < B.arrival"
 @temp = @connection.connection.execute(sql);
 
 
-@busName = Array.new
-@arrivalTime = Array.new
-@temp.each do |t|
-  tempbus = Bus.find(t[0])
-  @busName.push(tempbus.name)
-  tempTime =  t[2].strftime("%I:%M:%S ") # "09:33:00 -0400"
-  @arrivalTime.push(tempTime)
-end
-
-@size = @busName.length
-
 
    #Get all the buses at the start location and respective timing
   # @startBuses = Array.new
