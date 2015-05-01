@@ -20,6 +20,8 @@ gem 'geocoder'
 #Geokit
 gem 'geokit-rails'
 
+gem 'rails_12factor'
+
 gem 'pg'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
