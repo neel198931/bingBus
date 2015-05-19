@@ -62,7 +62,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52a1eb', end
 		}
 		else
 		{
-			document.myform.current_location.value = "browser does not support geolocation"
+			document.myform.userlocation_field.value = "browser does not support geolocation"
 		}
 	}
 
@@ -74,7 +74,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52a1eb', end
 		geocoder.geocode({'latLng': location}, function (results,status) {
 			if (status == google.maps.GeocoderStatus.OK) {
 				var add=results[0].formatted_address;
-				document.myform.current_location.value = add
+				document.myform.userlocation_field.value = add
 			}					
 		});
 	}
@@ -112,7 +112,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52a1eb', end
           <div class="container" align ="center">
           <div  align = "center">
 
-   <%= form_tag("/welcome/index", name: "myform", method: "post") do %>
+   <%= form_tag("/welcome/index", name: "myinputform", method: "post") do %>
   <div class ="input-group">
   <label>Current Location</label>
   <%= text_field_tag("address", params['address'], :id => 'current_location', :class => 'form-control') %>
@@ -125,12 +125,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52a1eb', end
   
   <p>
     <br/>
-<%= submit_tag "", :value => "Find Buses", :class => "btn btn-default" %>  </p>
-
+<%= submit_tag "", :value => "Find Buses", :class => "btn btn-default" %> </p>
 <% end %>
-
-<button class="btn btn-default" onclick="getCurrentLocation()">Find me!</button>
-
         
       </div>
                 
@@ -141,15 +137,28 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52a1eb', end
 
 <% if @cStop && @dStop %>
 <b>
-<%= "Current Stop: "%>
-</b>
-<%=" #{@cStop.name} "%>
-<b>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-<%= "Destination Stop: "%>
-</b>
-<%= "#{@dStop.name}"%>
-<br/><br/>
+	<%= form_tag(map_show_path, name: "myform", method: "get") do %>
+
+	<b>
+	<%= "Current Stop: "%>
+	</b>
+	<%= "#{@cStop.name}" %>
+	<%= text_field_tag("pickup", "#{@cStop.name}", :id => 'currentstop_field', :class => 'form-control') %>
+
+	<b>
+	<%= "Destination Stop: "%>
+	</b>
+	<%= "#{@cStop.name}" %>
+	<%= text_field_tag("dropoff", "#{@dStop.name}", :id => 'destinationstop_field', :class => 'form-control') %>
+
+	<%= "User Location: "%>
+	<%= text_field_tag("user", "", :id => 'userlocation_field', :class => 'form-control') %>
+
+	<%= button_tag "Find me!", :type => 'button', :class => 'btn btn-default', :onclick =>"getCurrentLocation()" %>
+
+	<%= submit_tag "", :value => "Show a map", :class => "btn btn-default" %>
+	<% end %>
+
 <% end %>
 
 

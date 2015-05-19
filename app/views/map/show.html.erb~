@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+		
+
+    <title>Directions service</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+		<script src="gmaps_functionality.js"></script>
+    
+
+		<script>
+		var directionsDisplay;
+		var directionsService = new google.maps.DirectionsService();
+		var map;
+
+		function getUrlVars() {
+				var vars = {};
+				var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+				    vars[key] = value;
+				});
+				return vars;
+		}
+
+
+		function initialize() {
+			directionsDisplay = new google.maps.DirectionsRenderer();
+			var binghamtonUniversity = new google.maps.LatLng(42.088828,-75.966972);
+			var mapOptions = {
+				zoom:14,
+				center: new google.maps.LatLng(42.088828,-75.966972)
+			};
+			map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+			directionsDisplay.setMap(map);
+
+			var pickup = getUrlVars()["pickup"]
+			var destination = getUrlVars()["dropoff"]
+			var user = getUrlVars()["user"] 
+			
+			var waypts = []
+			
+
+			if (user == "")
+			{
+				calcRoute(pickup, destination, waypts)
+			}
+
+			else
+			{
+				waypts.push({
+					location: pickup,
+					stopover: true
+				})
+
+				calcRoute(user, destination, waypts)
+			}
+		}
+
+		function calcRoute(start,end, otherWayPoints) {
+			var request = {
+				  origin:start,
+				  destination:end,
+					waypoints:otherWayPoints,
+				  travelMode: google.maps.TravelMode.DRIVING
+			};
+			directionsService.route(request, function(response, status) {
+				if (status == google.maps.DirectionsStatus.OK) {
+				  directionsDisplay.setDirections(response);
+				}
+			});
+		}
+
+		google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+   	
+		<%= link_to "Main page", "/" %>
+
+    <div id="map-canvas"></div>
+  </body>
+</html>
