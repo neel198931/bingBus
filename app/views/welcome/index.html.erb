@@ -54,6 +54,35 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52a1eb', end
 
 
 <script type="text/javascript">
+	function getCurrentLocation()
+	{
+		if (navigator.geolocation)
+		{
+			navigator.geolocation.getCurrentPosition(showPosition)
+		}
+		else
+		{
+			document.myform.current_location.value = "browser does not support geolocation"
+		}
+	}
+
+	function showPosition(position)
+	{
+		var geocoder = new google.maps.Geocoder();
+		var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+		
+		geocoder.geocode({'latLng': location}, function (results,status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				var add=results[0].formatted_address;
+				document.myform.current_location.value = add
+			}					
+		});
+	}
+</script>
+
+
+
+<script type="text/javascript">
   function initialize() {
 
   var input = document.getElementById('address');
@@ -83,10 +112,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52a1eb', end
           <div class="container" align ="center">
           <div  align = "center">
 
-   <%= form_tag("/welcome/index", method: "post") do %>
+   <%= form_tag("/welcome/index", name: "myform", method: "post") do %>
   <div class ="input-group">
   <label>Current Location</label>
-  <%= text_field_tag("address", params['address'], :class => 'form-control') %>
+  <%= text_field_tag("address", params['address'], :id => 'current_location', :class => 'form-control') %>
 </div><br/>
 <div class ="input-group">
   <label>Destination Location</label>
@@ -100,6 +129,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52a1eb', end
 
 <% end %>
 
+<button class="btn btn-default" onclick="getCurrentLocation()"> Geolocation</button>
 
         
       </div>
