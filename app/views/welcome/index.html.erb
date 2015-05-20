@@ -143,13 +143,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52a1eb', end
 	<%= "Current Stop: "%>
 	</b>
 	<%= "#{@cStop.name}" %>
-	<%= text_field_tag("pickup", "#{@cStop.name}", :id => 'currentstop_field', :class => 'form-control') %>
+	<%= hidden_field_tag("pickup", "#{@cStop.address}", :id => 'currentstop_field', :class => 'form-control') %>
 
 	<b>
 	<%= "Destination Stop: "%>
 	</b>
 	<%= "#{@cStop.name}" %>
-	<%= text_field_tag("dropoff", "#{@dStop.name}", :id => 'destinationstop_field', :class => 'form-control') %>
+	<%= hidden_field_tag("dropoff", "#{@dStop.address}", :id => 'destinationstop_field', :class => 'form-control') %>
 
 	<%= "User Location: "%>
 	<%= text_field_tag("user", "", :id => 'userlocation_field', :class => 'form-control') %>
